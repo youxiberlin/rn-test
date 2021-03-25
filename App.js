@@ -2,12 +2,25 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import Card from './components/Card';
+import BikeDetail from './components/BikeDetail';
 import bikes from './data/bike-data';
 
-function HomeScreen() {
+// bike categories can be put in a config or fetch from database in production
+const bikeCategories = ['road', 'city', 'e-bike', 'mountain']
+
+function HomeScreen({ navigation }) {
+  const makeCard = items => items.map(item =>
+    <Card
+      key={item.id}
+      name={item.name}
+      images={item.images}
+      price={item.price}
+      navigation={navigation}
+    />)
   return (
     <View style={styles.container}>
-      {bikes.map(bike => <Text>{bike.name}</Text>)}
+      {makeCard(bikes)}
     </View>
   );
 }
@@ -19,6 +32,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="BikeDetail" component={BikeDetail} />
       </Stack.Navigator>
     </NavigationContainer>
   );
