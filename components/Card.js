@@ -9,6 +9,7 @@ const Card = ({ name, images, price, navigation }) => {
         source={{ uri: images[0] }}
       />
       <View style={styles.textArea}>
+        <Text>€ {price}</Text>
         <Button
             title="Go To Detail"
             onPress={() => navigation.navigate('BikeDetail', {
@@ -16,7 +17,6 @@ const Card = ({ name, images, price, navigation }) => {
             })}
         />
         <Text>{name}</Text>
-        <Text>€ {price}</Text>
       </View>
     </View>
   );
